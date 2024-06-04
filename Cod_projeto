@@ -1,0 +1,29 @@
+#include <Adafruit_LiquidCrystal.h>
+
+int seconds = 0;
+int buttonState = 0;
+int lastButtonState = 0;
+int buttonPin = 2; // Pin do botão
+
+Adafruit_LiquidCrystal lcd_1(0);
+
+void setup() {
+  pinMode(buttonPin, INPUT);
+  lcd_1.begin(16, 2);
+  lcd_1.setCursor(0, 0);
+  lcd_1.print("Pressionar botao");
+  lcd_1.setCursor(0, 1);
+  lcd_1.print("SENHA ATUAL: 0");
+
+}
+
+void loop() {
+  buttonState = digitalRead(buttonPin);
+
+  if (buttonState != lastButtonState) {
+    if (buttonState == HIGH) {
+      seconds++;
+      lcd_1.clear();
+      lcd_1.setCursor(0, 0);
+      lcd_1.print("FIQUE ATENTO!");
+      lcd_1.setCursor(0, 1);
